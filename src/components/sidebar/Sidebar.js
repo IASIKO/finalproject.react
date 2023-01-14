@@ -29,7 +29,7 @@ export const Sidebar = () => {
           const { _id, name } = sidebarItem;
           return (
             <React.Fragment key={_id}>
-              <Link to={`/products/categories/${name}`}>
+              <Link to={`/products/categories/${name}?page=1&sort=name,asc`}>
                 <Box sx={{display: "flex"}}>
                     <StyledListItem>
                         <ListItemText secondary={name}/>
