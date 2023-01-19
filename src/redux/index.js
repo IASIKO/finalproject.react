@@ -7,7 +7,8 @@ import { userReducer } from "./slices/userSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import { useSelector } from "react-redux";
-import { productReducer } from "./slices/ProductSlice";
+import { productReducer } from "./slices/productSlice";
+import { cartReducer } from "./slices/cartSlice";
 
 const persistConfig = {
   key: "root",
@@ -18,6 +19,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -40,9 +42,16 @@ export {
   saveProduct,
   fetchHomePageProducts,
   fetchCategoryProducts,
+  fetchQueryProducts,
+  fetchSingleProductById,
   // reducers
   setSelectedProduct,
-} from "./slices/ProductSlice";
+  setSearchResults,
+} from "./slices/productSlice";
+
+// cart action creators
+
+export { addToCart, removeFromCart, clearCart } from "./slices/cartSlice";
 
 // user hooks
 
@@ -57,3 +66,11 @@ export const useCategories = () =>
   useSelector((state) => state.product.categories);
 export const useCategoryProducts = () =>
   useSelector((state) => state.product.categoryProducts);
+export const useSearchResults = () =>
+  useSelector((state) => state.product.searchResults);
+export const useSingleProduct = () =>
+  useSelector((state) => state.product.singleProduct);
+
+//  cart hooks
+
+export const useCartItems = () => useSelector((state) => state.cart.cartItems);
