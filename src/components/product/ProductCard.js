@@ -18,6 +18,7 @@ import {
   useCartItems,
   useUserInfo,
 } from "../../redux";
+import { Rating } from "./Rating";
 
 const StyledCardContent = styled(Box)(() => ({
   display: "flex",
@@ -62,6 +63,10 @@ export const ProductCard = ({
     navigate(`/products/edit/${name}`);
   };
 
+  const onRatingChange = (event) => {
+
+  }
+
   return (
     <Grid item>
       <Card>
@@ -81,6 +86,7 @@ export const ProductCard = ({
           </StyledCardContent>
         </Link>
         <CardActions>
+          <Rating value={1} isDisabled={!userInfo} onChange={onRatingChange}/>
           <StyledBox>
             {isProductInCart ? (
               <>

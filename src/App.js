@@ -5,7 +5,7 @@ import "./App.css";
 import { instance } from "./application";
 import { Header } from "./components/header";
 import { Sidebar } from "./components/sidebar/Sidebar";
-import { fetchHomePageProducts } from "./redux";
+import { fetchCart, fetchHomePageProducts, useUserInfo } from "./redux";
 import { RoutesComponent } from "./Routes";
 
 const StyledContentContainer = styled(Box)(() => ({
@@ -17,8 +17,12 @@ const StyledContentContainer = styled(Box)(() => ({
 
 function App() {
   const dispatch = useDispatch();
+  const userInfo = useUserInfo()
   useEffect(() => {
     dispatch(fetchHomePageProducts())
+    if (userInfo) {
+      dispatch(fetchCart(userInfo._id))
+    }
   }, []);
   return (
     <Box>

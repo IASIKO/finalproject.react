@@ -1,10 +1,11 @@
 import { AppBar, Badge, Box, Button, styled, Toolbar } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { UserIcon } from "./UserIcon";
 import { BsCart4 } from "react-icons/bs";
 import { useCartItems } from "../../redux";
+import { CartDrawer } from "./CartDrawer";
 
 const StyledAppBar = styled(AppBar)(() => ({
   background: "#fff",
@@ -37,6 +38,7 @@ export const Header = () => {
     (acc, cur) => acc + cur.quantity,
     0
   );
+  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
     <Box>
       <StyledAppBar>
@@ -44,11 +46,17 @@ export const Header = () => {
           <Link to="/">home</Link>
           <SearchBar />
           <UserIcon />
-          <Button>
+          <Button onClick={() => setIsCartOpen(true)}>
             <StyledBadge badgeContent={cartItemsQuantity}>
               <BsCart4 size={30} />
             </StyledBadge>
           </Button>
+          <CartDrawer
+            isOpen={isCartOpen}
+            onClose={() => {
+              setIsCartOpen(false);
+            }}
+          />
         </StyledToolBar>
       </StyledAppBar>
     </Box>

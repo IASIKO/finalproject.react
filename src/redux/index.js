@@ -51,7 +51,12 @@ export {
 
 // cart action creators
 
-export { addToCart, removeFromCart, clearCart } from "./slices/cartSlice";
+export { addToCart, removeFromCart, clearCart, 
+// async thunk
+fetchCart,
+saveCart,
+
+} from "./slices/cartSlice";
 
 // user hooks
 

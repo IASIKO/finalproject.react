@@ -26,7 +26,7 @@ const generateAddProductFormValues = (selectedProduct) => {
           : "description should have at least 2 characters",
     },
     category: {
-      value: selectedProduct?.description || "",
+      value: selectedProduct?.category || "",
       required: true,
       error: "",
       validateInput: (category) =>

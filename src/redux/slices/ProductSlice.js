@@ -3,11 +3,11 @@ import { instance } from "../../application";
 
 export const saveProduct = createAsyncThunk(
   "product/saveProduct",
-  async ({ product, isUpdating }, {dispatch}) => {
+  async ({ product, isUpdating }, { dispatch }) => {
     const endpoint = isUpdating ? `/products/${product.id}` : "/products";
     const method = isUpdating ? "put" : "post";
     const { data } = await instance[method](endpoint, { product });
-    dispatch(fetchHomePageProducts())
+    dispatch(fetchHomePageProducts());
     return data;
   }
 );
@@ -31,15 +31,25 @@ export const fetchCategoryProducts = createAsyncThunk(
 export const fetchQueryProducts = createAsyncThunk(
   "product/fetchQueryProducts",
   async (name) => {
-    const {data} = await instance.get(`/products?name=${name}`);
+    const { data } = await instance.get(`/products?name=${name}`);
     return data;
   }
 );
 
-export const fetchSingleProductById = createAsyncThunk("product/fetchSingleProductById", async ({id, category}) => {
-  const {data} = await instance.get(`/products/category/${category}/${id}`)
-  return data
-})
+export const fetchSingleProductById = createAsyncThunk(
+  "product/fetchSingleProductById",
+  async ({ id, category }) => {
+    const { data } = await instance.get(`/products/category/${category}/${id}`);
+    return data;
+  }
+);
+
+export const rateProduct = createAsyncThunk(
+  "product/rateProduct",
+  async ({ productId, userId }) => {
+    const { data } = await instance.post(`/${productId}/users/${userId}/rate`);
+  }
+);
 
 const productSlice = createSlice({
   name: "product",
@@ -57,9 +67,9 @@ const productSlice = createSlice({
     setSelectedProduct: (state, action) => {
       state.selectedProduct = action.payload.product;
     },
-    setSearchResults:(state) =>{
-      state.searchResults = []
-    }
+    setSearchResults: (state) => {
+      state.searchResults = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(saveProduct.pending, (state) => {
@@ -107,7 +117,7 @@ const productSlice = createSlice({
       state.loading = false;
       state.error = "something went wrong";
     });
-    
+
     builder.addCase(fetchSingleProductById.pending, (state) => {
       state.loading = true;
     });

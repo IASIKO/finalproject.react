@@ -1,4 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { instance } from "../../application";
+
+export const fetchCart = createAsyncThunk("cart/fetchCart", async(userId) => {
+  const {data} = await instance.get(`users/${userId}/cart`)
+  return data
+})
+
+export const saveCart = createAsyncThunk("cart/saveCart", async({userId, cartItems}, {dispatch})=>{
+  await instance.put(`/users/${userId}/cart`, {products: cartItems})
+  dispatch(fetchCart(userId))
+})
 
 const cartSlice = createSlice({
   name: "cart",
@@ -50,6 +61,29 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = [];
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(saveCart.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(saveCart.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(saveCart.rejected, (state) => {
+      state.loading = false;
+      state.error = "will change to custom error";
+    });
+    builder.addCase(fetchCart.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchCart.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cartItems = action.payload.cart;
+    });
+    builder.addCase(fetchCart.rejected, (state) => {
+      state.loading = false;
+      state.error = "couldn't fetch cart";
+    });
   },
 });
 
