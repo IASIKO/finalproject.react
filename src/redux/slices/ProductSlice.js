@@ -46,8 +46,15 @@ export const fetchSingleProductById = createAsyncThunk(
 
 export const rateProduct = createAsyncThunk(
   "product/rateProduct",
-  async ({ productId, userId }) => {
-    const { data } = await instance.post(`/${productId}/users/${userId}/rate`);
+  async ({ productId, userId, url, rating, isHome }, { dispatch }) => {
+    await instance.post(`/products/${productId}/users/${userId}/rate`, {
+      rating,
+    });
+    if (!isHome) {
+      dispatch(fetchCategoryProducts(url));
+    } else {
+      dispatch(fetchHomePageProducts());
+    }
   }
 );
 

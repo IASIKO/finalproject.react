@@ -9,10 +9,11 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isUserAdmin } from "../../application";
 import {
   addToCart,
+  rateProduct,
   removeFromCart,
   setSelectedProduct,
   useCartItems,
@@ -39,6 +40,7 @@ export const ProductCard = ({
   category,
   brand,
   description,
+  averageRating,
 }) => {
   const cartItems = useCartItems();
   const dispatch = useDispatch();
@@ -63,9 +65,19 @@ export const ProductCard = ({
     navigate(`/products/edit/${name}`);
   };
 
-  const onRatingChange = (event) => {
+  const { pathname, search } = useLocation();
 
-  }
+  const onRatingChange = (event) => {
+    dispatch(
+      rateProduct({
+        productId: _id,
+        userId: userInfo?._id,
+        url: `${category}${search}&size=1`,
+        isHome: pathname ==="/",
+        rating: event.target.value,
+      })
+    );
+  };
 
   return (
     <Grid item>
@@ -86,7 +98,11 @@ export const ProductCard = ({
           </StyledCardContent>
         </Link>
         <CardActions>
-          <Rating value={1} isDisabled={!userInfo} onChange={onRatingChange}/>
+          <Rating
+            value={averageRating}
+            isDisabled={!userInfo}
+            onChange={onRatingChange}
+          />
           <StyledBox>
             {isProductInCart ? (
               <>

@@ -44,6 +44,7 @@ export {
   fetchCategoryProducts,
   fetchQueryProducts,
   fetchSingleProductById,
+  rateProduct,
   // reducers
   setSelectedProduct,
   setSearchResults,
