@@ -10,7 +10,7 @@ import { CartDrawer } from "./CartDrawer";
 const StyledAppBar = styled(AppBar)(() => ({
   background: "#fff",
   color: "#103B66",
-  width: "calc(100% - 255px)",
+  width: "calc(100%)",
   padding: "0 100px 0 30px",
   display: "flex",
 }));
@@ -19,6 +19,7 @@ const StyledToolBar = styled(Toolbar)(() => ({
   display: "flex",
   width: "100%",
   justifyContent: "space-between",
+  textDecoration: "none",
 }));
 
 const StyledBadge = styled(Badge)(() => ({
@@ -43,8 +44,13 @@ export const Header = () => {
     <Box>
       <StyledAppBar>
         <StyledToolBar>
-          <Link to="/">home</Link>
+          <Link style={{ textDecoration: "none" }} to="/">
+            COMPANY NAME
+          </Link>
           <SearchBar />
+          <Link style={{ textDecoration: "none" }} to="/">
+            Home
+          </Link>
           <UserIcon />
           <Button onClick={() => setIsCartOpen(true)}>
             <StyledBadge badgeContent={cartItemsQuantity}>

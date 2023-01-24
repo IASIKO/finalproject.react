@@ -25,6 +25,8 @@ const StyledCardContent = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  color: "black",
+  padding: "10px"
 }));
 
 const StyledBox = styled(Box)(() => ({
@@ -73,7 +75,7 @@ export const ProductCard = ({
         productId: _id,
         userId: userInfo?._id,
         url: `${category}${search}&size=1`,
-        isHome: pathname ==="/",
+        isHome: pathname === "/",
         rating: event.target.value,
       })
     );
@@ -83,6 +85,7 @@ export const ProductCard = ({
     <Grid item>
       <Card>
         <Link
+          style={{ textDecoration: "none" }}
           to={`/products/categories/${category}/${name}`}
           state={{ id: _id }}
         >
@@ -94,7 +97,7 @@ export const ProductCard = ({
           />
           <StyledCardContent>
             <Typography>{name}</Typography>
-            <Typography>{price}</Typography>
+            <Typography>$ {price}</Typography>
           </StyledCardContent>
         </Link>
         <CardActions>

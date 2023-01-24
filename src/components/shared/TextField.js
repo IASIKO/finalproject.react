@@ -5,7 +5,8 @@ export const TextFieldComponent = ({name, label, value, onChange, error}) => {
   return (
     <TextField
     variant='outlined'
-    margin="dense"
+    margin='dense'
+    fullWidth
     name={name}
     label={label}
     value={value}
