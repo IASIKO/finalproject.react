@@ -2,7 +2,7 @@ import { Box, styled } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.css";
-import { instance } from "./application";
+import StickyFooter from "./components/footer/StickyFooter";
 import { Header } from "./components/header";
 import { Sidebar } from "./components/sidebar/Sidebar";
 import { fetchCart, fetchHomePageProducts, useUserInfo } from "./redux";
@@ -31,6 +31,7 @@ function App() {
       <StyledContentContainer>
         <RoutesComponent />
       </StyledContentContainer>
+      <StickyFooter/>
     </Box>
   );
 }
