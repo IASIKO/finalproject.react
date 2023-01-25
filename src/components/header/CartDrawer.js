@@ -100,7 +100,7 @@ export const CartDrawer = ({ isOpen, onClose }) => {
       ) : (
         <StyledEmptyBasketBox>
           <MdRemoveShoppingCart size={50} color="blue" display={"flex"} />{" "}
-          Basket is empty
+          Cart is empty
         </StyledEmptyBasketBox>
       )}
     </Drawer>
