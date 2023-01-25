@@ -28,13 +28,12 @@ const StyledTotalBox = styled(Box)(() => ({
 const StyledCartButton = styled(Button)(() => ({
   marginTop: "10px",
   color: "blue",
-  borderRadius: "10px",
   "&:hover": {
     backgroundColor: "grey",
     color: "white",
   },
 }));
-const StyledEmptyBasketBox = styled(Box)(() => ({
+const StyledEmptyCartBox = styled(Box)(() => ({
   padding: "10px",
   marginTop: "50%",
   display: "flex",
@@ -98,10 +97,10 @@ export const CartDrawer = ({ isOpen, onClose }) => {
           )}
         </>
       ) : (
-        <StyledEmptyBasketBox>
-          <MdRemoveShoppingCart size={50} color="blue" display={"flex"} />{" "}
-          Cart is empty
-        </StyledEmptyBasketBox>
+        <StyledEmptyCartBox>
+          <MdRemoveShoppingCart size={50} color="blue" display={"flex"} /> Cart
+          is empty
+        </StyledEmptyCartBox>
       )}
     </Drawer>
   );

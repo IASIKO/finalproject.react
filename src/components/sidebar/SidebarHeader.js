@@ -16,7 +16,7 @@ export const SidebarHeader = () => {
   }));
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div style={{ overflowX: "hidden" }}>
       <Link
         style={{
           textDecoration: "none",
