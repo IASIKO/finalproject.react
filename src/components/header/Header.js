@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { UserIcon } from "./UserIcon";
-import { BsCart4 } from "react-icons/bs";
+import { MdShoppingCart } from "react-icons/md";
 import { useCartItems } from "../../redux";
 import { CartDrawer } from "./CartDrawer";
 
@@ -15,7 +15,7 @@ const StyledAppBar = styled(AppBar)(() => ({
   display: "flex",
 }));
 
- const StyledToolBar = styled(Toolbar)(() => ({
+const StyledToolBar = styled(Toolbar)(() => ({
   display: "flex",
   width: "100%",
   justifyContent: "space-between",
@@ -48,7 +48,7 @@ export const Header = () => {
           <UserIcon />
           <Button onClick={() => setIsCartOpen(true)}>
             <StyledBadge badgeContent={cartItemsQuantity}>
-              <BsCart4 size={30} />
+              <MdShoppingCart size={40} />
             </StyledBadge>
           </Button>
           <CartDrawer
