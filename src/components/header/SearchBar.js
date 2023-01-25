@@ -30,7 +30,7 @@ const SearchBar = () => {
     <Autocomplete
       freeSolo
       className="searchBar"
-      sx={{ width: 300 }}
+      sx={{ width: 500,  }}
       disableClearable
       options={searchResults}
       getOptionLabel={(option) => option.name}
