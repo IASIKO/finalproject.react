@@ -1,6 +1,4 @@
 import {
-  alpha,
-  Box,
   Divider,
   Drawer,
   List,
@@ -8,48 +6,38 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  styled,
 } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCategories } from "../../redux";
 import { SidebarHeader } from "./SidebarHeader";
 
-const StyledListItem = styled(ListItem)(() => ({
-  padding: "5px 0px 3px 15px",
-  margin: "0px",
-}));
 
 export const Sidebar = () => {
   const sidebarItems = useCategories();
 
-  const categoryItems = sidebarItems.map((sidebarItem) => {
-    const { _id, name } = sidebarItem;
-    return (
-      <React.Fragment key={_id}>
-        <Link to={`/products/categories/${name}?page=1&sort=name,asc`}>
-          <Box sx={{ display: "flex" }}>
-            <StyledListItem>
-              <ListItemText secondary={name} />
-            </StyledListItem>
-          </Box>
-        </Link>
-      </React.Fragment>
-    );
-  });
-
+  
   const drawer = (
     <div>
       <Divider />
       <List>
-        {categoryItems.map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} style={{ textDecoration: "none" }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {sidebarItems.map((sidebarItem) => {
+          const { _id, name } = sidebarItem;
+          return (
+            <ListItem key={_id} disablePadding style={{ display: "block" }}>
+              <Link
+                to={`/products/categories/${name}?page=1&sort=name,asc`}
+                style={{ textDecoration: "none" }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <ListItemText primary={name}/>
+                  </ListItemIcon>
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          );
+        })}
       </List>
       <Divider />
     </div>

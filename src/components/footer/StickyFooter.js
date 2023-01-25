@@ -25,6 +25,7 @@ export default function StickyFooter() {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        marginLeft: "250px"
       }}
     >
       <CssBaseline />
@@ -34,7 +35,6 @@ export default function StickyFooter() {
           py: 8,
           px: 2,
           mt: 'auto',
-          width: "calc(100%)",
           backgroundColor: (theme) =>
             theme.palette.mode === 'light'
               ? theme.palette.grey[400]
