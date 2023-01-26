@@ -30,17 +30,18 @@ const SearchBar = () => {
     <Autocomplete
       freeSolo
       className="searchBar"
-      sx={{ width: 500,  }}
+      sx={{ width: 500 }}
       disableClearable
       options={searchResults}
       getOptionLabel={(option) => option.name}
       renderOption={(_, option) => {
-        const {name, category, _id, price} = option
+        const { name, category, _id, price } = option;
         return (
           <Link
+            style={{ textDecoration: "none", color: "black" }}
             to={`/products/categories/${category}/${name}`}
             key={_id}
-            state={{id: _id}}
+            state={{ id: _id }}
           >
             <Box sx={{ display: "flex" }}>
               <Typography>{name}</Typography>
